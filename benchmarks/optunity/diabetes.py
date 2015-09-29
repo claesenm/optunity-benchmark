@@ -26,12 +26,5 @@ labels = [True] * len(positive_idx) + [False] * len(negative_idx)
 
 objfun = hpo.make_svm_objfun(data, labels, num_folds)
 
-pars, info, _ = optunity.maximize(objfun, num_evals=budget, pmap=optunity.pmap, **search)
-df = optunity.call_log2dataframe(info.call_log)
-
-with open('results/%s-optunity.pkl' % name, 'w') as f:
-    log = {'results': df['value'], 'logC': df['logC'], 'logGamma': df['logGamma']}
-    pickle.dump(log, f)
-
 hpo_search = hpo.svm_search_space(**search)
 hpo.setup_hpolib(hpo.negate(objfun), hpo_search, budget, name)
