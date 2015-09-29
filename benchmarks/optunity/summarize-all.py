@@ -4,7 +4,7 @@ import operator as op
 import numpy as np
 import pandas
 
-budget = 75
+budget = int(sys.argv[1])
 
 datasets = ['digits-%d' % i for i in range(10)] + ['covtype-%d' % i for i in range(1, 8)] + ['adult', 'diabetes', 'breast-cancer', 'ionosphere']
 datasets = ['digits-%d' % i for i in range(10)] + ['covtype-%d' % i for i in range(1, 8)] + ['diabetes', 'ionosphere']
@@ -41,15 +41,13 @@ for dataset in datasets:
     for i, d in enumerate(srtd):
         ranks[d[0]].append(i + 1)
 
-print('solver\t average rank')
+print('solver\taverage rank')
 for solver in solvers:
     print('%s\t%1.3f' % (solver, float(sum(ranks[solver])) / len(ranks[solver])))
 
 print('\n')
-print('dataset & ' + " & ".join(map(lambda x: solvermap[x], solvers)) + " & $Q_3$ \\\\")
-print('\midrule')
+print('dataset \t' + "\t".join(map(lambda x: solvermap[x], solvers)) + "\tQ_3")
 for dataset in datasets:
-    print('\\texttt{%s}' % dataset + ' & ' + ' & '.join(map(lambda x: "%1.2f" % (100 * all_results[dataset][x]), solvers)) + " & %1.2f \\\\" % (100.0 * random90[dataset]))
+    print('%s' % dataset + '\t' + '\t'.join(map(lambda x: "%1.2f" % (100 * all_results[dataset][x]), solvers)) + "\t%1.2f" % (100.0 * random90[dataset]))
 
-print('\midrule')
-print('average rank & ' + " & ".join(map(lambda x: "%1.3f" % (float(sum(ranks[x])) / len(ranks[x])), solvers)) + " & N/A \\\\")
+print('average rank \t' + "\t".join(map(lambda x: "%1.3f" % (float(sum(ranks[x])) / len(ranks[x])), solvers)) + "\tN/A")
