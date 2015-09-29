@@ -19,6 +19,7 @@ for solver in solvers:
 
     performance[solver] = perf
 
+print("\n\nSUMMARY FOR %s\n" % name)
 print("\n".join(map(str, sorted(performance.items(),
                                 key=op.itemgetter(1),
                                 reverse=True))))
