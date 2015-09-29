@@ -6,11 +6,15 @@ declare -a NAMES=("digits-0" "digits-1" "digits-2" "digits-3" "digits-4" "digits
 
 for NAME in "${NAMES[@]}"
 do
-    echo "=================================="
-    echo "======"
-    echo "====== NOW RUNNING $NAME"
-    echo "======"
-    echo "=================================="
+    echo ""
+    echo ""
+    echo "============================================================"
+    echo "==============="
+    echo "===============          NOW RUNNING $NAME"
+    echo "==============="
+    echo "============================================================"
+    echo ""
+    echo ""
 
     sh run-experiment.sh $NAME
 done
