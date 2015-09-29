@@ -19,43 +19,43 @@ params-spearmint.pcs: space.py
 .PHONY: clean
 
 clean:
-	rm -f params-smac.pcs params-spearmint.pcs pickle.pkl
+	rm -f params-smac.pcs params-spearmint.pcs
 	rm -rf smac_*
 	rm -rf spearmint_*
 	rm -rf hyperopt_*
 	rm -rf random_*
 
-results/%-optunity.pkl: %.py
-	python $*.py
+results/%-optunity.pkl: run-optunity.py /tmp/data.pkl
+	python run-optunity.py $*
 
-results/%-tpe.pkl: tags/%.py
+results/%-tpe.pkl: executable.py /tmp/data.pkl
 	rm -f /tmp/results.pkl
 	make tpe-experiment
 	mv /tmp/results.pkl $@
 
-results/%-smac.pkl: tags/%.py
+results/%-smac.pkl: executable.py /tmp/data.pkl
 	rm -f /tmp/results.pkl
 	make smac-experiment
 	mv /tmp/results.pkl $@
 
-results/%-spearmint.pkl: tags/%.py
+results/%-spearmint.pkl: executable.py /tmp/data.pkl
 	rm -f /tmp/results.pkl
 	make spearmint-experiment
 	mv /tmp/results.pkl $@
 
-results/%-random.pkl: tags/%.py
+results/%-random.pkl: executable.py /tmp/data.pkl
 	rm -f /tmp/results.pkl
 	make random-experiment
 	mv /tmp/results.pkl $@
 
 results/%-all.pkl: fuse.py %.py results/%-optunity.pkl results/%-tpe.pkl results/%-random.pkl results/%-smac.pkl results/%-bayesopt.pkl
 	python fuse.py $*
-	cp pickled_data.pkl results/$*-data.pkl
+	cp /tmp/data.pkl results/$*-data.pkl
 	python summarize.py $*
 
-results/%-bayesopt.pkl: fuse.py bayesopt-wrapper.py results/%-data.pkl
+results/%-bayesopt.pkl: bayesopt-wrapper.py /tmp/data.pkl
+	rm -f /tmp/results.pkl
 	python bayesopt-wrapper.py $*
 	mv /tmp/results.pkl $@
-	cp results/$*-data.pkl pickled_data.pkl
 
 .PRECIOUS: results/%-optunity.pkl results/%-tpe.pkl results/%-random.pkl results/%-smac.pkl results/%-bayesopt.pkl
