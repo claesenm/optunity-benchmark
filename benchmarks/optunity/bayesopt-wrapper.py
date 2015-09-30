@@ -3,17 +3,8 @@ import numpy as np
 import sklearn
 import sklearn.svm
 import optunity.metrics
-import sys
 import cloudpickle as pickle
 import bayesopt
-
-dataname = 'digits-0'
-
-def load_context(dataname='digits-0'):
-    with open('results/%s-data.pkl' % dataname, 'r') as f:
-        context = pickle.load(f)
-        objfun = context['objfun']
-    return context['objfun'], context['search'], context['typemap']
 
 def prepare_objfun(fun, search):
 
@@ -34,14 +25,17 @@ def prepare_objfun(fun, search):
 
 
 if __name__ == '__main__':
-    dataname = sys.argv[1]
-    objfun, search, typemap = load_context(dataname)
+    with open('/tmp/data.pkl', 'r') as f:
+        context = pickle.load(f)
+        objfun = context['objfun']
+        search = context['search']
+        typemap = context['typemap']
 
     objfun = prepare_objfun(objfun, search)
 
     params = {}
     params['n_iterations'] = 150
-    params['n_iter_relearn'] = 5
+#    params['n_iter_relearn'] = 5
 
     # configuration used throughout experiments
     # search={'logC': [-8, 1], 'logGamma': [-8, 1]}

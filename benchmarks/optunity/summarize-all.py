@@ -5,6 +5,10 @@ import numpy as np
 import pandas
 
 budget = int(sys.argv[1])
+try:
+    repetition = int(sys.argv[2])
+except:
+    repetition = None
 
 datasets = ['digits-%d' % i for i in range(10)] + ['covtype-%d' % i for i in range(1, 8)] + ['adult', 'diabetes', 'breast-cancer', 'ionosphere']
 datasets = ['digits-%d' % i for i in range(10)] + ['covtype-%d' % i for i in range(1, 8)] + ['diabetes', 'ionosphere']
@@ -21,19 +25,35 @@ random90 = {}
 
 for dataset in datasets:
     all_results[dataset] = {}
-    with open('results/%s-all.pkl' % dataset, 'r') as f:
-        results = pickle.load(f)
-        performance = {}
-        for solver in solvers:
-            if solver == 'optunity':
-                perf = max(results[solver]['results'][:budget])
-            else:
-                perf = -min(results[solver]['results'][:budget])
-            all_results[dataset][solver] = perf
+    if repetition:
+        with open('results-repeated/%s-all.pkl-%d' % (dataset, repetition), 'r') as f:
+            results = pickle.load(f)
+            performance = {}
+            for solver in solvers:
+                if solver == 'optunity':
+                    perf = max(results[solver]['results'][:budget])
+                else:
+                    perf = -min(results[solver]['results'][:budget])
+                all_results[dataset][solver] = perf
 
-            if solver == 'random':
-                srtd = sorted(results[solver]['results'], reverse=True)
-                random90[dataset] = -srtd[int(0.75 * len(srtd))]
+                if solver == 'random':
+                    srtd = sorted(results[solver]['results'], reverse=True)
+                    random90[dataset] = -srtd[int(0.75 * len(srtd))]
+
+    else:
+        with open('results/%s-all.pkl' % dataset, 'r') as f:
+            results = pickle.load(f)
+            performance = {}
+            for solver in solvers:
+                if solver == 'optunity':
+                    perf = max(results[solver]['results'][:budget])
+                else:
+                    perf = -min(results[solver]['results'][:budget])
+                all_results[dataset][solver] = perf
+
+                if solver == 'random':
+                    srtd = sorted(results[solver]['results'], reverse=True)
+                    random90[dataset] = -srtd[int(0.75 * len(srtd))]
 
 ranks = {solver: [] for solver in solvers}
 for dataset in datasets:
