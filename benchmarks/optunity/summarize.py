@@ -3,7 +3,7 @@ import sys
 import operator as op
 
 name = sys.argv[1]
-budget = sys.argv[2]
+budget = int(sys.argv[2])
 
 solvers = ['optunity', 'tpe', 'random', 'smac', 'bayesopt']
 
