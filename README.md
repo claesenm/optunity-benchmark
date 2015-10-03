@@ -11,13 +11,13 @@ namely `optunity`, `hyperopt`, `bayesopt`, `sklearn` and `cloudpickle`.
 
 The benchmark itself is available in the `benchmarks/optunity` subfolder, and contains the following key elements:
 
-- *run-experiment.sh <problem>* runs a full experiment for the specified problem (`digits-[1-9]`, `covtype-[1-7]`, `ionosphere` or `diabetes`)
-- *run-all.sh* runs all experiments over 19 data sets, no commandline arguments
-- *summarize.py <problem> <budget>* Python script to look at the results of a benchmark run for specified problem at the specified evaluation budget
-- *summarize-all.py <budget> [<repetition>]* Python script to look at the results of a run of the full benchmark suite. 
+- `run-experiment.sh <problem>` runs a full experiment for the specified problem (`digits-[1-9]`, `covtype-[1-7]`, `ionosphere` or `diabetes`)
+- `run-all.sh` runs all experiments over 19 data sets, no commandline arguments
+- `summarize.py problem budget` Python script to look at the results of a benchmark run for specified problem at the specified evaluation budget
+- `summarize-all.py budget [repetition]` Python script to look at the results of a run of the full benchmark suite. 
     If repetition is omitted, the results of a user-generated run are reported, which must be a full benchmark (cfr. `run-all.sh`).
     If repetition is specified (1-5), the full results of that run as reported in the paper are shown.
-- *summarize-all-repeated.py <budget> <start> <stop>* Python script to summarize all repeated runs from <start> to <stop> at given budget. 
+- `summarize-all-repeated.py budget start stop` Python script to summarize all repeated runs from <start> to <stop> at given budget. 
     Calling `python summarize-all-repeated.py 75|150 1 5` will produce the latex tables as shown in the paper.
 
 Additionally, a bunch of useful `make` recipes are available (specifically `make clean`, since HPOlib likes to generate a lot of folders).
