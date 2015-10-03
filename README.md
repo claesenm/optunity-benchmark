@@ -1,7 +1,7 @@
 Optunity benchmark (based on HPOlib)
 ==========================================
 
-This repo contains the benchmark comparing [Optunity](http://git.optunity.net) to SMAC, Hyperopt, BayesOpt and random search.
+This repo contains the benchmark comparing [Optunity](https://github.com/claesenm/optunity) to SMAC, Hyperopt, BayesOpt and random search.
 The experimental setup is based on HPOlib, which provides SMAC, Hyperopt and random search.
 
 HPOlib is licensed as GPL. All benchmark-specific code (in `benchmarks/optunity/`) is licensed under the [CRAPL](http://matt.might.net/articles/crapl/) and BSD simultaneously (TL;DR: feel free to use it for whatever but buyer beware).
