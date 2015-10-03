@@ -17,7 +17,7 @@ The benchmark itself is available in the `benchmarks/optunity` subfolder, and co
 - `summarize-all.py budget [repetition]` Python script to look at the results of a run of the full benchmark suite. 
     If repetition is omitted, the results of a user-generated run are reported, which must be a full benchmark (cfr. `run-all.sh`).
     If repetition is specified (1-5), the full results of that run as reported in the paper are shown.
-- `summarize-all-repeated.py budget start stop` Python script to summarize all repeated runs from <start> to <stop> at given budget. 
+- `summarize-all-repeated.py budget start stop` Python script to summarize all repeated runs from *start* to *stop* at given budget. 
     Calling `python summarize-all-repeated.py 75|150 1 5` will produce the latex tables as shown in the paper.
 
 Additionally, a bunch of useful `make` recipes are available (specifically `make clean`, since HPOlib likes to generate a lot of folders).
