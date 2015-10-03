@@ -25,7 +25,7 @@ Additionally, a bunch of useful `make` recipes are available (specifically `make
 Briefly, experiments are based on an automatically generated file `/tmp/data.pkl`, 
 which contains the objective function to be used by all optimizers and some meta-data.
 Function evaluations of all optimizers (except Optunity) are logged via side-effects in `/tmp/results.pkl` and later 
-moved into the `benchmarks/optunity/results` folder.
+moved into the `benchmarks/optunity/results` folder. This approach is dirty but intuitive and effective.
 
 The `benchmarks/optunity/results` folder will contain the following files after running a benchmark:
 
